@@ -1,6 +1,7 @@
 package org.out.yslf.trueselftv;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Switch;
@@ -58,5 +59,15 @@ public class MainActivity extends Activity {
     public void onLockManagerClick(View view) {
         LockManager.removeLockSettings(this);
         ToastManager.showToast(this, "已重置设备管理器");
+    }
+
+    public void onShowKeyClick(View view) {
+        startActivity(new Intent(this, ShowKeyActivity.class));
+    }
+
+    public void onAppManagerClick(View view) {
+    }
+
+    public void onFileManagerClick(View view) {
     }
 }

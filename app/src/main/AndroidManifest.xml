@@ -16,6 +16,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".BlackActivity" />
+        <activity android:name=".ShowKeyActivity" />
 
         <receiver
             android:name=".BootManager"
