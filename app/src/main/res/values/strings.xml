@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">爱奇艺VIP</string>
+    <string name="app_name">电视助手</string>
     <string name="app_name_lock">锁屏</string>
     <string name="main_note">----通知栏控制器----\n显示通知栏后，点击可进入爱奇艺</string>
     <string name="tip_show_key">----在此显示按下的按键----\n按下返回键退出</string>

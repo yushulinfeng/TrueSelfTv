@@ -66,6 +66,7 @@ public class MainActivity extends Activity {
     }
 
     public void onAppManagerClick(View view) {
+        startActivity(new Intent(this, AppShowActivity.class));
     }
 
     public void onFileManagerClick(View view) {

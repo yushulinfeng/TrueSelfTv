@@ -3,6 +3,7 @@
     package="org.out.yslf.trueselftv">
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:icon="@drawable/ic_launcher"
@@ -17,6 +18,7 @@
         </activity>
         <activity android:name=".BlackActivity" />
         <activity android:name=".ShowKeyActivity" />
+        <activity android:name=".AppShowActivity" />
 
         <receiver
             android:name=".BootManager"
