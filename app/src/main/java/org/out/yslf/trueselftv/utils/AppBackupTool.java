@@ -1,4 +1,4 @@
-package org.out.yslf.trueselftv;
+package org.out.yslf.trueselftv.utils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -21,7 +21,7 @@ import java.io.InputStream;
  * @author sunyulin01
  * @since 2019-02-11
  */
-public class BackupManager {
+public class AppBackupTool {
     private static final int EVENT_COMPLETE = 0;
     private static final int EVENT_ERROR = -1;
 
@@ -64,15 +64,15 @@ public class BackupManager {
 
     @SuppressLint("HandlerLeak")
     private static void startBackup(Context context, String source, String dest) {
-        ToastManager.showToast(context, "开始备份");
+        ToastTool.showToast(context, "开始备份");
         if (completeHandler == null) {
             final Context appContext = context.getApplicationContext();
             completeHandler = new Handler() {
                 public void handleMessage(Message msg) {
                     if (msg.what == EVENT_COMPLETE) {
-                        ToastManager.showToast(appContext, "备份完成：" + msg.obj);
+                        ToastTool.showToast(appContext, "备份完成：" + msg.obj);
                     } else if (msg.what == EVENT_ERROR) {
-                        ToastManager.showToast(appContext, "备份失败：" + msg.obj);
+                        ToastTool.showToast(appContext, "备份失败：" + msg.obj);
                     }
                 }
             };

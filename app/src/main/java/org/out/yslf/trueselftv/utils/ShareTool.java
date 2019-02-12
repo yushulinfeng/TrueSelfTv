@@ -1,4 +1,4 @@
-package org.out.yslf.trueselftv;
+package org.out.yslf.trueselftv.utils;
 
 import android.content.Context;
 
@@ -8,7 +8,7 @@ import android.content.Context;
  * @author sunyulin01
  * @since 2019-01-29
  */
-public class ShareManager {
+public class ShareTool {
     private static final String SAVE_PATH = "note_save_path";
     private static final String SAVE_BOOT_KEY = "boot";
     private static final String SAVE_LOCK_KEY = "lock";

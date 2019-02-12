@@ -19,6 +19,9 @@ import android.widget.ImageView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import org.out.yslf.trueselftv.utils.AppBackupTool;
+import org.out.yslf.trueselftv.utils.ToastTool;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -48,7 +51,7 @@ public class AppShowActivity extends Activity implements OnItemClickListener, Ru
 
     private void initView() {
         TextView pathView = findViewById(R.id.app_show_back_path);
-        pathView.setText("（备份路径：" + BackupManager.getBackupPath() + "）");
+        pathView.setText("（备份路径：" + AppBackupTool.getBackupPath() + "）");
         drawer_grid = findViewById(R.id.activity_app_grid_allapp);
         imagelist = Collections.synchronizedList(new ArrayList<>());
         simpleAdapter = new SimpleAdapter(this,
@@ -117,7 +120,7 @@ public class AppShowActivity extends Activity implements OnItemClickListener, Ru
                             startActivityComplete(this, info.packageName, info.name);
                             break;
                         case 1:
-                            BackupManager.backupApp(this, info, getPackageManager());
+                            AppBackupTool.backupApp(this, info, getPackageManager());
                             break;
                         case 2:
                             uninstallApk(info.packageName);
@@ -140,7 +143,7 @@ public class AppShowActivity extends Activity implements OnItemClickListener, Ru
         try {
             context.startActivity(intent);
         } catch (Exception e) {
-            ToastManager.showToast(this, "启动失败");
+            ToastTool.showToast(this, "启动失败");
         }
     }
 
@@ -150,7 +153,7 @@ public class AppShowActivity extends Activity implements OnItemClickListener, Ru
             Intent intent = new Intent(Intent.ACTION_DELETE, uri);
             startActivity(intent);
         } catch (Exception e) {
-            ToastManager.showToast(this, "卸载失败");
+            ToastTool.showToast(this, "卸载失败");
         }
 
     }

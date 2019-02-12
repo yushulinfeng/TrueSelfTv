@@ -1,9 +1,11 @@
-package org.out.yslf.trueselftv;
+package org.out.yslf.trueselftv.utils;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+
+import org.out.yslf.trueselftv.LockReceiver;
 
 /**
  * 锁屏管理器
@@ -11,7 +13,7 @@ import android.content.Intent;
  * @author sunyulin01
  * @since 2019-02-06
  */
-public class LockManager {
+public class LockScreenTool {
 
     /**
      * 锁屏
@@ -20,19 +22,19 @@ public class LockManager {
         DevicePolicyManager policyManager =
                 (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
         if (policyManager == null) {
-            ToastManager.showToast(context, "设备管理器为空");
+            ToastTool.showToast(context, "设备管理器为空");
             return;
         }
         ComponentName componentName = new ComponentName(context, LockReceiver.class);
         if (!policyManager.isAdminActive(componentName)) {
-            ToastManager.showToast(context, "请提供锁屏授权");
+            ToastTool.showToast(context, "请提供锁屏授权");
             showLockSettings(context);
             return;
         }
         try {
             policyManager.lockNow();
         } catch (Exception e) {
-            ToastManager.showToast(context, "锁屏失败");
+            ToastTool.showToast(context, "锁屏失败");
         }
     }
 
@@ -47,7 +49,7 @@ public class LockManager {
         try {
             context.startActivity(intent);
         } catch (Exception e) {
-            ToastManager.showToast(context, "错误：" + e.getMessage());
+            ToastTool.showToast(context, "错误：" + e.getMessage());
         }
     }
 
@@ -58,7 +60,7 @@ public class LockManager {
         DevicePolicyManager policyManager =
                 (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
         if (policyManager == null) {
-            ToastManager.showToast(context, "设备管理器为空");
+            ToastTool.showToast(context, "设备管理器为空");
             return;
         }
         ComponentName componentName = new ComponentName(context, LockReceiver.class);

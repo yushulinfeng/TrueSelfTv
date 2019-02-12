@@ -1,4 +1,4 @@
-package org.out.yslf.trueselftv;
+package org.out.yslf.trueselftv.utils;
 
 import android.content.Context;
 import android.widget.Toast;
@@ -9,7 +9,7 @@ import android.widget.Toast;
  * @author sunyulin01
  * @since 2019-01-29
  */
-public class ToastManager {
+public class ToastTool {
 
     public static void showToast(Context context, Object msg) {
         Toast.makeText(context, String.valueOf(msg), Toast.LENGTH_SHORT).show();

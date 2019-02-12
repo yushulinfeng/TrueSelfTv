@@ -6,21 +6,27 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Switch;
 
+import org.out.yslf.trueselftv.utils.LockScreenTool;
+import org.out.yslf.trueselftv.utils.PermissionsTools;
+import org.out.yslf.trueselftv.utils.ShareTool;
+import org.out.yslf.trueselftv.utils.ToastTool;
+
 public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        PermissionsTools.verifyStoragePermissions(this);
 
         initView();
     }
 
     private void initView() {
         Switch switchNote = findViewById(R.id.main_switch);
-        switchNote.setChecked(ShareManager.getBootEnabled(this));
+        switchNote.setChecked(ShareTool.getBootEnabled(this));
         switchNote.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            ShareManager.setBootEnabled(this, isChecked);
+            ShareTool.setBootEnabled(this, isChecked);
             if (isChecked) {
                 NoteManager.showBootNote(this);
             } else {
@@ -29,9 +35,9 @@ public class MainActivity extends Activity {
         });
 
         Switch switchLock = findViewById(R.id.main_switch_lock);
-        switchLock.setChecked(ShareManager.getLockEnabled(this));
+        switchLock.setChecked(ShareTool.getLockEnabled(this));
         switchLock.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            ShareManager.setLockEnabled(this, isChecked);
+            ShareTool.setLockEnabled(this, isChecked);
             if (isChecked) {
                 NoteManager.showLockNote(this);
             } else {
@@ -44,7 +50,7 @@ public class MainActivity extends Activity {
         try {
             startActivity(NoteManager.getQiyiIntent());
         } catch (Exception e) {
-            ToastManager.showToast(this, "请先安装相关应用");
+            ToastTool.showToast(this, "请先安装相关应用");
         }
     }
 
@@ -53,12 +59,12 @@ public class MainActivity extends Activity {
     }
 
     public void onLockTestClick(View view) {
-        LockManager.lockScreen(this);
+        LockScreenTool.lockScreen(this);
     }
 
     public void onLockManagerClick(View view) {
-        LockManager.removeLockSettings(this);
-        ToastManager.showToast(this, "已重置设备管理器");
+        LockScreenTool.removeLockSettings(this);
+        ToastTool.showToast(this, "已重置设备管理器");
     }
 
     public void onShowKeyClick(View view) {
@@ -70,5 +76,6 @@ public class MainActivity extends Activity {
     }
 
     public void onFileManagerClick(View view) {
+        startActivity(new Intent(this, FileShowActivity.class));
     }
 }

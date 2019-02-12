@@ -8,6 +8,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 
+import org.out.yslf.trueselftv.utils.ToastTool;
+
 /**
  * 通知管理器
  *
@@ -83,7 +85,7 @@ public class NoteManager {
     private static void showNote(Context context, Notification.Builder builder, int noteId) {
         NotificationManager notificationManager = getNoteManager(context);
         if (notificationManager == null) {
-            ToastManager.showToast(context, "无法获取通知管理器");
+            ToastTool.showToast(context, "无法获取通知管理器");
             return;
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -103,7 +105,7 @@ public class NoteManager {
     private static void hideNote(Context context, int noteId) {
         NotificationManager notificationManager = getNoteManager(context);
         if (notificationManager == null) {
-            ToastManager.showToast(context, "无法获取通知管理器");
+            ToastTool.showToast(context, "无法获取通知管理器");
             return;
         }
         notificationManager.cancel(noteId);

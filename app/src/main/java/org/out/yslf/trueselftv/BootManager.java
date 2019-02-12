@@ -4,6 +4,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
+import org.out.yslf.trueselftv.utils.ShareTool;
+
 /**
  * 启动管理器
  *
@@ -18,10 +20,10 @@ public class BootManager extends BroadcastReceiver {
         if (intent == null || !BOOT_COMPLETE.equals(intent.getAction())) {
             return;
         }
-        if (ShareManager.getBootEnabled(context)) {
+        if (ShareTool.getBootEnabled(context)) {
             NoteManager.showBootNote(context);
         }
-        if (ShareManager.getLockEnabled(context)) {
+        if (ShareTool.getLockEnabled(context)) {
             NoteManager.showLockNote(context);
         }
     }

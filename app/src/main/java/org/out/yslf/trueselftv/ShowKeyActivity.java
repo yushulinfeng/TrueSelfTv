@@ -6,6 +6,8 @@ import android.view.KeyEvent;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import org.out.yslf.trueselftv.utils.KeyMapTool;
+
 import java.util.Locale;
 
 /**
@@ -18,7 +20,7 @@ public class ShowKeyActivity extends Activity {
     private static final String KEY_MSG_FORMAT = "%s : %d";
     private ScrollView scrollView;
     private TextView textView;
-    private ShowKeyMap showKeyMap;
+    private KeyMapTool keyMapTool;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +28,7 @@ public class ShowKeyActivity extends Activity {
         setContentView(R.layout.activity_show_key);
         scrollView = findViewById(R.id.show_key_scroll);
         textView = findViewById(R.id.show_key_tv);
-        showKeyMap = new ShowKeyMap();
+        keyMapTool = new KeyMapTool();
     }
 
     @Override
@@ -48,7 +50,7 @@ public class ShowKeyActivity extends Activity {
 
     private void showKey(int keyCode) {
         String name = String.format(Locale.CHINA, KEY_MSG_FORMAT,
-                showKeyMap.getKeyName(keyCode), keyCode);
+                keyMapTool.getKeyName(keyCode), keyCode);
         textView.append("\n");
         textView.append(name);
         scrollView.post(() -> scrollView.fullScroll(ScrollView.FOCUS_DOWN));
