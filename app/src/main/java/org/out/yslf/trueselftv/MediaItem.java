@@ -30,7 +30,7 @@ public class MediaItem implements Comparable<MediaItem> {
     }
 
     public MediaItem(String realPath) {
-        if (realPath.contains("/")) {
+        if (realPath != null && !realPath.equals("/") && realPath.contains("/")) {
             if (realPath.endsWith("/")) {
                 realPath = realPath.substring(0, realPath.length() - 1);
             }
@@ -140,6 +140,10 @@ public class MediaItem implements Comparable<MediaItem> {
     public String getInfo() {
         if (info != null) return info;
         return "";
+    }
+
+    public boolean isFolder() {
+        return type == MediaItem.TYPE_FOLDER;
     }
 
     @Override

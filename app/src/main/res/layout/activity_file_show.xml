@@ -12,11 +12,35 @@
         android:text="文件管理"
         android:textColor="@color/black" />
 
-    <!--此处可以安排一些控制按钮-->
-
-    <ListView
-        android:id="@+id/file_show_list"
+    <TextView
+        android:id="@+id/file_show_path"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical" />
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="根目录"
+        android:textColor="@color/gray"
+        android:textSize="10sp" />
+
+    <!--此处可以安排一些控制按钮-->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/file_show_empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="空目录"
+            android:textColor="@color/gray"
+            android:textSize="10sp" />
+
+        <ListView
+            android:id="@+id/file_show_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical" />
+    </FrameLayout>
 </LinearLayout>
