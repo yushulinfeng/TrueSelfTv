@@ -11,9 +11,11 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.out.yslf.trueselftv.utils.EasyDialogBuilder;
 import org.out.yslf.trueselftv.utils.FileShowTool;
 import org.out.yslf.trueselftv.utils.ToastTool;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -73,9 +75,25 @@ public class FileShowActivity extends Activity implements OnItemClickListener, O
         if (currentPath == null) {
             return true; // 根目录禁止操作
         }
-        MediaItem item = items.get(position);
-        // TODO: 2019/2/13 处理长按事件（即菜单事件）（其他的不必支持了）：打开（音频也走调起），复制，剪切，删除
-        ToastTool.showToast(this, "长按：" + item.getName());
+        final MediaItem item = items.get(position);
+        // TODO: 2019/2/13 完善菜单项
+        EasyDialogBuilder.builder(this)
+                .setTitle("[ " + item.getName() + " ]")
+                .addItem("打开", null)
+                .addItem("复制", null)
+                .addItem("剪切", null)
+                .addItem("删除", () -> EasyDialogBuilder.builder(this)
+                        .setTitle("删除：" + item.getName())
+                        .setMessage("确认删除？操作不可恢复。")
+                        .setPositiveButton("确定", () -> {
+                            boolean success = fileTool.deleteFile(new File(item.getRealPath()));
+                            showPathFiles(currentPath);
+                            ToastTool.showToast(this, item.getName() + " : "
+                                    + (success ? "删除成功" : "删除失败"));
+                        })
+                        .setNegativeButton("取消", null)
+                        .show())
+                .show();
         return true;
     }
 
