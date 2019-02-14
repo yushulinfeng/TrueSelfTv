@@ -1,6 +1,9 @@
 package org.out.yslf.trueselftv.utils;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Environment;
 import android.text.TextUtils;
 
@@ -74,22 +77,27 @@ public class FileShowTool {
     /**
      * 移动文件。可以是文件名，也可以是目录。但需要前后一致。
      * 移动某个文件/文件夹为某个新的文件/文件夹
+     *
+     * @param oldPath String 原文件路径（文件、文件夹均可）
+     * @param newPath String 复制后路径（必须是文件夹，即不支持重命名复制）
+     * @return boolean 是否移动成功
      */
     public boolean moveFile(String oldPath, String newPath) {
         File oldFile = new File(oldPath);
+        if (!oldFile.exists()) return false;
         File temp = new File(newPath).getParentFile();
         if (!temp.exists()) temp.mkdirs();
-        return oldFile.renameTo(new File(newPath));
+        return oldFile.renameTo(new File(newPath, oldFile.getName()));
     }
 
     /**
-     * 复制单个文件
+     * 复制文件
      *
      * @param oldPath String 原文件路径（文件、文件夹均可）
      * @param newPath String 复制后路径（必须是文件夹，即不支持重命名复制）
      * @return boolean 是否复制成功
      */
-    private static boolean copyFile(String oldPath, String newPath) {
+    public boolean copyFile(String oldPath, String newPath) {
         File oldfile = new File(oldPath);
         File newfile = new File(newPath);
         if (!oldfile.exists()) return false;
@@ -152,4 +160,51 @@ public class FileShowTool {
         return false;
     }
 
+    /**
+     * 打开文件
+     */
+    public void openFile(Context context, String filePath) {
+        File file = new File(filePath);
+        if (!file.exists()) {
+            ToastTool.showToast(context, "文件不存在");
+            return;
+        }
+        if (file.isDirectory()) {
+            ToastTool.showToast(context, "文件夹不支持打开");
+            return;
+        }
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        // FIXME: 2019/2/14 解决高版本：android.os.FileUriExposedException:问题
+        Uri uri = Uri.fromFile(new File(filePath));
+        switch (MediaItem.getFileType(filePath)) {
+            case MediaItem.TYPE_VIDEO:
+                intent.setDataAndType(uri, "video/*");
+                break;
+            case MediaItem.TYPE_AUDIO:
+                intent.setDataAndType(uri, "audio/*");
+                break;
+            case MediaItem.TYPE_IMAGE:
+                intent.setDataAndType(uri, "image/*");
+                break;
+            case MediaItem.TYPE_LYRIC:
+            case MediaItem.TYPE_TEXT:
+                intent.setDataAndType(uri, "text/plain");
+                break;
+            default:
+                if (file.getName().endsWith(".apk")) {
+                    intent.setDataAndType(uri, "application/vnd.android.package-archive");
+                } else {
+                    intent.setDataAndType(uri, "*/*");
+                }
+                break;
+        }
+        try {
+            context.startActivity(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+            ToastTool.showToast(context, "打开文件失败");
+        }
+    }
 }

@@ -22,7 +22,47 @@
         android:textColor="@color/gray"
         android:textSize="10sp" />
 
-    <!--此处可以安排一些控制按钮-->
+    <LinearLayout
+        android:id="@+id/file_show_panel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/file_show_paste"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onDoPasteClick"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="粘贴" />
+
+        <TextView
+            android:id="@+id/file_show_copy_path"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="middle"
+            android:gravity="center"
+            android:maxLines="3"
+            android:text="复制目录"
+            android:textColor="@color/black"
+            android:textSize="10sp" />
+
+        <Button
+            android:id="@+id/file_show_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onCancelPasteClick"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="取消" />
+    </LinearLayout>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">

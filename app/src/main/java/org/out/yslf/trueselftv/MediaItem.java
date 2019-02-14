@@ -61,20 +61,7 @@ public class MediaItem implements Comparable<MediaItem> {
     }
 
     private void initType() {
-        if (new File(realPath).isDirectory())
-            type = MediaItem.TYPE_FOLDER;
-        else if (MediaTool.isVideoFile(name))
-            type = MediaItem.TYPE_VIDEO;
-        else if (MediaTool.isAudioFile(name))
-            type = MediaItem.TYPE_AUDIO;
-        else if (MediaTool.isImageFile(name))
-            type = MediaItem.TYPE_IMAGE;
-        else if (MediaTool.isLyricFile(name))
-            type = MediaItem.TYPE_LYRIC;
-        else if (MediaTool.isTextFile(name))
-            type = MediaItem.TYPE_TEXT;
-        else
-            type = MediaItem.TYPE_NONE;
+        type = getFileType(realPath);
     }
 
     private void initInfo() {
@@ -166,5 +153,27 @@ public class MediaItem implements Comparable<MediaItem> {
         else if (size < 1073741824) res = df.format(size / 1048576.0) + "MB";
         else res = df.format(size / 1073741824.0) + "GB";
         return res;
+    }
+
+    /**
+     * 获取文件类型
+     */
+    public static int getFileType(String realPath) {
+        File realFile = new File(realPath);
+        String name = realFile.getName();
+        if (realFile.isDirectory())
+            return MediaItem.TYPE_FOLDER;
+        else if (MediaTool.isVideoFile(name))
+            return MediaItem.TYPE_VIDEO;
+        else if (MediaTool.isAudioFile(name))
+            return MediaItem.TYPE_AUDIO;
+        else if (MediaTool.isImageFile(name))
+            return MediaItem.TYPE_IMAGE;
+        else if (MediaTool.isLyricFile(name))
+            return MediaItem.TYPE_LYRIC;
+        else if (MediaTool.isTextFile(name))
+            return MediaItem.TYPE_TEXT;
+        else
+            return MediaItem.TYPE_NONE;
     }
 }

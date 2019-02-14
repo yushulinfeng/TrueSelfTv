@@ -77,6 +77,14 @@ public class EasyDialogBuilder {
         return this;
     }
 
+    public EasyDialogBuilder addItem(boolean trueWillPut, String name,
+                                     ItemClickListener listener) {
+        if (trueWillPut) { // 条件为true，则添加菜单项
+            map.put(name, listener);
+        }
+        return this;
+    }
+
     public EasyDialogBuilder addConfirmItem(String name, String confirm,
                                             ItemClickListener listener) {
         map.put(name, () -> new AlertDialog.Builder(builder.getContext())
