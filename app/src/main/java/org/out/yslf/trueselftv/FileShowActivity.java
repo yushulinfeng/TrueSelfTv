@@ -69,13 +69,11 @@ public class FileShowActivity extends Activity
         }
         MediaItem item = items.get(position);
         if (item.isFolder()) {
+            // TODO: 2019/2/13 试试4.4手机，能否读取到根目录
             showPathFiles(item.getRealPath());
         } else {
-            // FIXME: 2019/2/14 解决高版本：android.os.FileUriExposedException:问题
             fileTool.openFile(this, item.getRealPath());
         }
-        // 文件处理
-        // TODO: 2019/2/13 试试4.4手机，能否读取到根目录
     }
 
     @Override

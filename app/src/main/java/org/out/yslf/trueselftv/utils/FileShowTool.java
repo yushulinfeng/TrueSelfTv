@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.text.TextUtils;
 
@@ -22,6 +23,7 @@ import java.util.List;
  * @since 2019/2/13
  */
 public class FileShowTool {
+    private static final String FILE_PROVIDER_NAME = "org.out.yslf.trueselftv.provider";
     private List<String> rootPath;
 
     public FileShowTool(Activity activity) {
@@ -176,8 +178,13 @@ public class FileShowTool {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.addCategory(Intent.CATEGORY_DEFAULT);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        // FIXME: 2019/2/14 解决高版本：android.os.FileUriExposedException:问题
-        Uri uri = Uri.fromFile(new File(filePath));
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        Uri uri;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            uri = FileProvider.getUriForFile(context, FILE_PROVIDER_NAME, file);
+        } else {
+            uri = Uri.fromFile(file);
+        }
         switch (MediaItem.getFileType(filePath)) {
             case MediaItem.TYPE_VIDEO:
                 intent.setDataAndType(uri, "video/*");
