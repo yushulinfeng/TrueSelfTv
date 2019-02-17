@@ -93,7 +93,6 @@ public class MediaTool {//考虑添加一个长按强制分类型打开
         return final_path;
     }
 
-
     // 读取数据
     public static String readLrcFromFile(String file_name) {
         String all_todo = "";
@@ -109,7 +108,6 @@ public class MediaTool {//考虑添加一个长按强制分类型打开
             return "";
         }
     }
-
 
     public static boolean isAudioFile(String file_name) {
         file_name = dealFileName(file_name);

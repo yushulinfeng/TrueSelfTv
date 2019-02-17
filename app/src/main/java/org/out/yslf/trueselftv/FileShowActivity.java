@@ -1,6 +1,7 @@
 package org.out.yslf.trueselftv;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -87,7 +88,7 @@ public class FileShowActivity extends Activity
         EasyDialogBuilder.builder(this)
                 .setTitle("[ " + item.getName() + " ]")
                 .addItem(item.getType() == MediaItem.TYPE_AUDIO,
-                        "打开", () -> openAudioFile(filePath))
+                        "打开", () -> openAudioFile(this, filePath))
                 .addItem("复制", () -> startCopyFile(filePath, false))
                 .addItem("剪切", () -> startCopyFile(filePath, true))
                 .addItem("删除", () -> EasyDialogBuilder.builder(this)
@@ -144,8 +145,8 @@ public class FileShowActivity extends Activity
         isClip = clip;
     }
 
-    private void openAudioFile(String filePath) {
-        // TODO: 2019/2/15 打开音乐文件
+    private void openAudioFile(Context context, String filePath) {
+        MusicActivity.playMusic(context, filePath);
     }
 
     private void showPathFiles(String path) {

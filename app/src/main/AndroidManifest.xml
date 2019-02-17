@@ -24,6 +24,7 @@
         <activity android:name=".ShowKeyActivity" />
         <activity android:name=".AppShowActivity" />
         <activity android:name=".FileShowActivity" />
+        <activity android:name=".MusicActivity" />
 
         <receiver
             android:name=".BootManager"
