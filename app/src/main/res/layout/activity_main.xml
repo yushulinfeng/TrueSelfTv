@@ -108,7 +108,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:gravity="center"
-            android:text="文件管理说明：menu显示更多操作。音乐文件menu中支持本地打开。"
+            android:text="文件管理说明：menu显示更多操作。音乐文件menu中支持其他应用打开。"
             android:textColor="@color/black"
             android:textSize="14sp" />
     </LinearLayout>

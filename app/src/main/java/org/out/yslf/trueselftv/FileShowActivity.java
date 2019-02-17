@@ -69,11 +69,24 @@ public class FileShowActivity extends Activity
             return;
         }
         MediaItem item = items.get(position);
+        String realPath = item.getRealPath();
         if (item.isFolder()) {
             // TODO: 2019/2/13 试试4.4手机，能否读取到根目录
-            showPathFiles(item.getRealPath());
-        } else {
-            fileTool.openFile(this, item.getRealPath());
+            showPathFiles(realPath);
+            return;
+        }
+        switch (item.getType()) {
+            case MediaItem.TYPE_AUDIO:
+                openAudioFile(this, realPath);
+                break;
+            case MediaItem.TYPE_TEXT:
+            case MediaItem.TYPE_LYRIC:
+            case MediaItem.TYPE_NONE:
+                openTextFile(this, realPath);
+                break;
+            default:
+                fileTool.openFile(this, realPath);
+                break;
         }
     }
 
@@ -87,8 +100,8 @@ public class FileShowActivity extends Activity
         final String filePath = item.getRealPath();
         EasyDialogBuilder.builder(this)
                 .setTitle("[ " + item.getName() + " ]")
-                .addItem(item.getType() == MediaItem.TYPE_AUDIO,
-                        "打开", () -> openAudioFile(this, filePath))
+                .addItem(!isUnsupportType(item.getType()), // 有默认打开方式的，要允许其他应用打开
+                        "其他应用打开", () -> fileTool.openFile(this, filePath))
                 .addItem("复制", () -> startCopyFile(filePath, false))
                 .addItem("剪切", () -> startCopyFile(filePath, true))
                 .addItem("删除", () -> EasyDialogBuilder.builder(this)
@@ -145,8 +158,27 @@ public class FileShowActivity extends Activity
         isClip = clip;
     }
 
+    // 本应用不支持的类型
+    private boolean isUnsupportType(int type) {
+        switch (type) {
+            case MediaItem.TYPE_AUDIO:
+            case MediaItem.TYPE_TEXT:
+            case MediaItem.TYPE_LYRIC:
+            case MediaItem.TYPE_NONE:
+                return false;
+            default:
+                return true;
+        }
+    }
+
     private void openAudioFile(Context context, String filePath) {
         MusicActivity.playMusic(context, filePath);
+    }
+
+    private void openTextFile(Context context, String filePath) {
+        // TODO: 2019/2/17 增加打开为文本的处理
+        // TODO: 2019/2/17 超过5M直接提示打开失败
+        ToastTool.showToast(this, "开发中……");
     }
 
     private void showPathFiles(String path) {
