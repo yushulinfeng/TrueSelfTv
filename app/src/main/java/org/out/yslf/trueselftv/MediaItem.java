@@ -69,17 +69,10 @@ public class MediaItem implements Comparable<MediaItem> {
         if (type == TYPE_BACK) {
             info = "···";
         } else if (type == TYPE_FOLDER) {
-            try {
-                info = String.valueOf(new File(realPath).list().length) + "项";
-            } catch (Exception ignore) {
-            }
+            String[] subs = new File(realPath).list();
+            info = String.valueOf(subs == null ? 0 : subs.length) + "项";
         } else {
-            try {
-                FileInputStream temp_stream = new FileInputStream(getRealPath());
-                info = formatSize(temp_stream.available());
-                temp_stream.close();
-            } catch (Exception ignore) {
-            }
+            info = formatSize(getFileSize(realPath));
         }
     }
 
@@ -175,5 +168,16 @@ public class MediaItem implements Comparable<MediaItem> {
             return MediaItem.TYPE_TEXT;
         else
             return MediaItem.TYPE_NONE;
+    }
+
+    /**
+     * 获取文件大小（返回结果单位：B(即byte，注：1byte=8bit)）
+     */
+    public static int getFileSize(String realPath) {
+        try (FileInputStream temp_stream = new FileInputStream(realPath)) {
+            return temp_stream.available();
+        } catch (Exception ignore) {
+        }
+        return 0;
     }
 }

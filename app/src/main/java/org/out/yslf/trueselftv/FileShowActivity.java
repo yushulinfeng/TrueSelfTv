@@ -176,9 +176,7 @@ public class FileShowActivity extends Activity
     }
 
     private void openTextFile(Context context, String filePath) {
-        // TODO: 2019/2/17 增加打开为文本的处理
-        // TODO: 2019/2/17 超过5M直接提示打开失败
-        ToastTool.showToast(this, "开发中……");
+        TextActivity.showText(context, filePath);
     }
 
     private void showPathFiles(String path) {
