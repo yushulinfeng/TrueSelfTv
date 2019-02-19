@@ -71,7 +71,6 @@ public class FileShowActivity extends Activity
         MediaItem item = items.get(position);
         String realPath = item.getRealPath();
         if (item.isFolder()) {
-            // TODO: 2019/2/13 试试4.4手机，能否读取到根目录
             showPathFiles(realPath);
             return;
         }
