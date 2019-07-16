@@ -91,7 +91,7 @@ public class FileShowActivity extends Activity
 
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        if (currentPath == null) {
+        if (currentPath == null || position < 0) {
             return true; // 根目录禁止操作
         }
         MediaItem item = items.get(position);
