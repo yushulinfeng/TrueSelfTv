@@ -75,6 +75,17 @@ public class MainActivity extends Activity {
         startActivity(new Intent(this, AppShowActivity.class));
     }
 
+    public void onOpenSettingClick(View view) {
+        Intent intent = new Intent();
+        intent.setClassName("com.android.settings",
+                "com.android.settings.MainSettings");
+        try {
+            startActivity(intent);
+        } catch (Exception e) {
+            ToastTool.showToast(this, "打开失败");
+        }
+    }
+
     public void onFileManagerClick(View view) {
         startActivity(new Intent(this, FileShowActivity.class));
     }
