@@ -36,9 +36,15 @@ public class NoteManager {
         return intent;
     }
 
+    public static Intent getQiyiJumpIntent(Context context) {
+        Intent intent = new Intent(context, QiyiJumpActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        return intent;
+    }
+
     public static void showBootNote(Context context) {
         Notification.Builder builder = new Notification.Builder(context);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, getQiyiIntent(), 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, getQiyiJumpIntent(context), 0);
         builder.setContentIntent(pendingIntent);
         builder.setSmallIcon(R.drawable.ic_iqiyi);
         builder.setContentTitle(NOTE_TITLE);

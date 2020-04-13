@@ -46,12 +46,18 @@ public class MainActivity extends Activity {
         });
     }
 
+    public void onVipCountClick(View view) {
+        int count = ShareTool.getQiyiTimes(this);
+        ToastTool.showLongToast(this, "从通知启动爱奇艺次数：" + count);
+    }
+
+    public void onVipCountResetClick(View view) {
+        ShareTool.saveQiyiTimes(this, 0);
+        ToastTool.showToast(this, "从通知启动爱奇艺次数：已重置为0次");
+    }
+
     public void onVipTestClick(View view) {
-        try {
-            startActivity(NoteManager.getQiyiIntent());
-        } catch (Exception e) {
-            ToastTool.showToast(this, "请先安装相关应用");
-        }
+        startActivity(NoteManager.getQiyiJumpIntent(this));
     }
 
     public void onBlackTestClick(View view) {

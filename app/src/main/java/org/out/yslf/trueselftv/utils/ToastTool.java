@@ -19,4 +19,9 @@ public class ToastTool {
         toast.show();
     }
 
+    public static void showLongToast(Context context, Object msg) {
+        if (toast != null) toast.cancel();
+        toast = Toast.makeText(context, String.valueOf(msg), Toast.LENGTH_LONG);
+        toast.show();
+    }
 }

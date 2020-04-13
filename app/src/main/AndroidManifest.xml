@@ -26,6 +26,9 @@
         <activity android:name=".FileShowActivity" />
         <activity android:name=".MusicActivity" />
         <activity android:name=".TextActivity" />
+        <activity
+            android:name=".QiyiJumpActivity"
+            android:theme="@android:style/Theme.NoDisplay" />
 
         <receiver
             android:name=".BootManager"
