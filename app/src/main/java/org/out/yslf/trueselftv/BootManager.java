@@ -26,6 +26,7 @@ public class BootManager extends BroadcastReceiver {
         if (ShareTool.getLockEnabled(context)) {
             NoteManager.showLockNote(context);
         }
+        ShareTool.writeLaunchTimeLog(context);
     }
 
 }

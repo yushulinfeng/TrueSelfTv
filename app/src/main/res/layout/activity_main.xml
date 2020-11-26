@@ -69,25 +69,31 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="onVipTestClick"
-                android:text="会员测试" />
+                android:text="会员" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="onBlackTestClick"
-                android:text="黑屏测试" />
+                android:text="黑屏" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="onLockTestClick"
-                android:text="锁屏测试" />
+                android:text="锁屏" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="onLockManagerClick"
                 android:text="锁屏移除" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onWriteLaunchLogClick"
+                android:text="记录写入" />
         </LinearLayout>
 
         <TextView
@@ -130,6 +136,14 @@
             android:layout_marginRight="10dp"
             android:onClick="onFileManagerClick"
             android:text="文件管理" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:onClick="onLaunchLogClick"
+            android:text="开机记录" />
 
         <TextView
             android:layout_width="match_parent"

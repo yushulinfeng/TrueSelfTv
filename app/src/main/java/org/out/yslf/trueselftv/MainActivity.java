@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Switch;
 
+import org.out.yslf.trueselftv.utils.EasyDialogBuilder;
 import org.out.yslf.trueselftv.utils.LockScreenTool;
 import org.out.yslf.trueselftv.utils.PermissionsTools;
 import org.out.yslf.trueselftv.utils.ShareTool;
@@ -71,6 +72,20 @@ public class MainActivity extends Activity {
     public void onLockManagerClick(View view) {
         LockScreenTool.removeLockSettings(this);
         ToastTool.showToast(this, "已重置设备管理器");
+    }
+
+    public void onWriteLaunchLogClick(View view) {
+        ShareTool.writeLaunchTimeLog(this);
+        ToastTool.showToast(this, "已写入测试的开机时间");
+    }
+
+    public void onLaunchLogClick(View view) { // 查看开机记录
+        String text = ShareTool.readLaunchTimeLog(this).trim();
+        EasyDialogBuilder.builder(this)
+                .setTitle("开机记录")
+                .setMessage(text)
+                .setPositiveButton("确定", null)
+                .show();
     }
 
     public void onShowKeyClick(View view) {
