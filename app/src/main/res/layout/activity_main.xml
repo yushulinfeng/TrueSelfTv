@@ -103,6 +103,12 @@
                 android:layout_height="wrap_content"
                 android:onClick="onWriteLaunchLogClick"
                 android:text="记录写入" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onShowSystemInfoClick"
+                android:text="信息" />
         </LinearLayout>
 
         <TextView
