@@ -19,12 +19,17 @@ import org.out.yslf.trueselftv.utils.ToastTool;
 public class NoteManager {
     private static final String NAME_PKG = "com.gitvdemo.video";
     private static final String NAME_CLS = "com.gala.video.app.epg.HomeActivity";
+    private static final String NAME_PKG_QQ = "com.ktcp.video";
+    private static final String NAME_CLS_QQ = "com.ktcp.video.activity.MainActivity";
     private static final int NOTE_BOOT_ID = "org.out.yslf.tvnote".hashCode(); // 避免重复
     private static final int NOTE_LOCK_ID = NOTE_BOOT_ID + 1; // 避免重复
+    private static final int NOTE_BOOT_QQ_ID = NOTE_BOOT_ID + 2; // 避免重复
     private static final String NOTE_CHANNEL_ID = "tvnote_vip";
     private static final String NOTE_CHANNEL_NAME = "爱奇艺VIP";
     private static final String NOTE_TITLE = "爱奇艺VIP";
     private static final String NOTE_TEXT = "按下OK键进入:爱奇艺";
+    private static final String NOTE_TITLE_QQ = "腾讯视频VIP";
+    private static final String NOTE_TEXT_QQ = "按下OK键进入:腾讯视频";
     private static final String NOTE_LOCK_TITLE = "手动锁屏";
     private static final String NOTE_LOCK_TEXT = "";
 
@@ -36,15 +41,30 @@ public class NoteManager {
         return intent;
     }
 
+    public static Intent getQqVideoIntent() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_LAUNCHER);
+        intent.setClassName(NAME_PKG_QQ, NAME_CLS_QQ);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        return intent;
+    }
+
     public static Intent getQiyiJumpIntent(Context context) {
         Intent intent = new Intent(context, QiyiJumpActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         return intent;
     }
 
+    public static Intent getQqVideoJumpIntent(Context context) {
+        Intent intent = new Intent(context, QiyiJumpActivity.class);
+        intent.putExtra(QiyiJumpActivity.KEY_TYPE, QiyiJumpActivity.VALUE_QQ_VIDEO);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        return intent;
+    }
+
     public static void showBootNote(Context context) {
         Notification.Builder builder = new Notification.Builder(context);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, getQiyiJumpIntent(context), 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, NOTE_BOOT_ID, getQiyiJumpIntent(context), 0);
         builder.setContentIntent(pendingIntent);
         builder.setSmallIcon(R.drawable.ic_iqiyi);
         builder.setContentTitle(NOTE_TITLE);
@@ -55,8 +75,26 @@ public class NoteManager {
         showNote(context, builder, NOTE_BOOT_ID);
     }
 
+    public static void showBootQqNote(Context context) {
+        Notification.Builder builder = new Notification.Builder(context);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, NOTE_BOOT_QQ_ID,
+                getQqVideoJumpIntent(context), 0); // requestCode不能够相同，否则将根据flag更新原intent。
+        builder.setContentIntent(pendingIntent);
+        builder.setSmallIcon(R.drawable.ic_launcher);
+        builder.setContentTitle(NOTE_TITLE_QQ);
+        builder.setAutoCancel(false);
+        builder.setOngoing(true);
+        builder.setContentText(NOTE_TEXT_QQ);
+        builder.setPriority(Notification.PRIORITY_HIGH);
+        showNote(context, builder, NOTE_BOOT_QQ_ID);
+    }
+
     public static void hideBootNote(Context context) {
         hideNote(context, NOTE_BOOT_ID);
+    }
+
+    public static void hideBootQqNote(Context context) {
+        hideNote(context, NOTE_BOOT_QQ_ID);
     }
 
     public static void showLockNote(Context context) {

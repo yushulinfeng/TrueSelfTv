@@ -23,6 +23,9 @@ public class BootManager extends BroadcastReceiver {
         if (ShareTool.getBootEnabled(context)) {
             NoteManager.showBootNote(context);
         }
+        if (ShareTool.getBootQqEnabled(context)) {
+            NoteManager.showBootQqNote(context);
+        }
         if (ShareTool.getLockEnabled(context)) {
             NoteManager.showLockNote(context);
         }

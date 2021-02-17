@@ -30,6 +30,15 @@
             android:textSize="18sp" />
 
         <Switch
+            android:id="@+id/main_switch_qq"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="腾讯会员开关"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <Switch
             android:id="@+id/main_switch_lock"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

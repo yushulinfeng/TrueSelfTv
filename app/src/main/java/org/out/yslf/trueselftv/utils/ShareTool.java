@@ -17,9 +17,9 @@ public class ShareTool {
     private static final String LAUNCH_SAVE_PATH = "launch_save_path";
     private static final String LAUNCH_TIME_KEY = "launch_time_key";
     private static final String SAVE_BOOT_KEY = "boot";
+    private static final String SAVE_BOOT_QQ_KEY = "boot_qq";
     private static final String SAVE_LOCK_KEY = "lock";
     public static final String SAVE_QIYI_TIMES_KEY = "qiyi_open_times";
-
 
     public static void setBootEnabled(Context context, boolean value) {
         setBoolean(context, SAVE_BOOT_KEY, value);
@@ -27,6 +27,14 @@ public class ShareTool {
 
     public static boolean getBootEnabled(Context context) {
         return getBoolean(context, SAVE_BOOT_KEY);
+    }
+
+    public static void setBootQqEnabled(Context context, boolean value) {
+        setBoolean(context, SAVE_BOOT_QQ_KEY, value);
+    }
+
+    public static boolean getBootQqEnabled(Context context) {
+        return getBoolean(context, SAVE_BOOT_QQ_KEY);
     }
 
     public static void setLockEnabled(Context context, boolean value) {

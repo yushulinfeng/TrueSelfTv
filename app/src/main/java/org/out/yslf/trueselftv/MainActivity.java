@@ -1,6 +1,7 @@
 package org.out.yslf.trueselftv;
 
 import android.app.Activity;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -32,6 +33,17 @@ public class MainActivity extends Activity {
                 NoteManager.showBootNote(this);
             } else {
                 NoteManager.hideBootNote(this);
+            }
+        });
+
+        Switch switchNoteQq = findViewById(R.id.main_switch_qq);
+        switchNoteQq.setChecked(ShareTool.getBootQqEnabled(this));
+        switchNoteQq.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            ShareTool.setBootQqEnabled(this, isChecked);
+            if (isChecked) {
+                NoteManager.showBootQqNote(this);
+            } else {
+                NoteManager.hideBootQqNote(this);
             }
         });
 
